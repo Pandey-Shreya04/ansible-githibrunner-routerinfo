@@ -1,0 +1,23 @@
+---
+- name: Get IOS version from switches
+  hosts: routers # Target the 'routers' group defined in inventory/hosts.yaml
+  gather_facts: false # No need to gather facts for this task, speeds it up
+
+  tasks:
+    - name: Run "show version" on device
+      # Use the ios_command module for Cisco IOS devices
+      # This module allows you to send commands to the device
+      ios_command:
+        # Define the commands to be executed on the remote device
+        commands:
+          - show version
+      # Register the output of the command into a variable named 'output'
+      register: output
+
+    - name: Display IOS version
+      # Use the debug module to print information to the console
+      debug:
+        # The 'output' variable contains a list of results from the 'commands'
+        # Since we only ran one command, the result is in output.stdout[0]
+        # output.stdout is a list of strings, each string being the output of a command
+        msg: "IOS Version for {{ inventory_hostname }}: \n{{ output.stdout[0] }}"

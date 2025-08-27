@@ -1,0 +1,7 @@
+---
+# Include the vault file
+# This tells Ansible to load variables from the encrypted vault.yaml
+# The path is relative to the directory containing group_vars/all.yaml
+# So, from group_vars/all.yaml, we go up one level (..) to automatenet/
+# then into vars/ and specify vault.yaml.
+- !include ../vars/vault.yaml
