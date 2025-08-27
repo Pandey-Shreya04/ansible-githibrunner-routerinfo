@@ -1,0 +1,13 @@
+name: Run Ansible Playbook
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run-ansible:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run get_ios.yaml playbook
+        run: ansible-playbook get_ios.yaml
