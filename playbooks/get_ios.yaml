@@ -1,7 +1,9 @@
 ---
 - name: Get IOS version from switches
   hosts: routers # Target the 'routers' group defined in inventory/hosts.yaml
-  gather_facts: false # No need to gather facts for this task, speeds it up
+  gather_facts: no # No need to gather facts for this task, speeds it up
+  vars_files:
+  - ../vars/vault.yaml  
 
   tasks:
     - name: Run "show version" on device
